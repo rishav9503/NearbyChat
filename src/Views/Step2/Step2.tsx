@@ -40,19 +40,17 @@ export default class Step2 extends React.Component <AppProps, StateType>{
       otpValue3: '',
       otpValue4: '',
       currentFocus: '',
-      isLoading:true
+      isLoading:false
 
     }
   
   }
-  submitOtp(){
-      return;
-  }
+  
 
  async onKeyPress(item:string ){
   const { currentFocus} = this.state
      if(item==='->'){
-      this.submitOtp()
+      this.handleSubmit()
      }
      if(item==='x'){
       textInput0.current?.setNativeProps({text:''})
@@ -101,26 +99,24 @@ export default class Step2 extends React.Component <AppProps, StateType>{
 
   }
   handleSubmit() {
-    this.setState({isLoading:true})
-    const cb = this.setState({isLoading:false})
-
-axios.post('https://5945c274-9c28-48ed-83c5-366add66f155.mock.pstmn.io/post_Store_owner',{
-        data: {},
+    this.setState({ isLoading: true })
+    axios.post('https://5945c274-9c28-48ed-83c5-366add66f155.mock.pstmn.io/post_Store_owner', {
+      data: {},
     })
-  .then((response)=> {
-    console.log(response);
+      .then((response) => {
+        console.log(response);
 
-    this.props.navigation.navigate('preview')
-  })
-  .catch(function (error) {
+        this.props.navigation.navigate('success')
+      })
+      .catch(function (error) {
 
-    console.log('error',error);
-  });
-  
-  this.setState({isLoading:false})
-  
-   
-}
+        console.log('error', error);
+      });
+
+    this.setState({ isLoading: false })
+
+
+  }
 
   renderPdf(){
     return(
@@ -158,7 +154,7 @@ axios.post('https://5945c274-9c28-48ed-83c5-366add66f155.mock.pstmn.io/post_Stor
             <TextInput ref={textInput2} value={otpValue3 }  onFocus={()=> {  this.setState({showKeyboard:true, currentFocus: '2'}) }} showSoftInputOnFocus={false}  style={styles.otpInputBox} />
             <TextInput ref={textInput3} value={otpValue4}  onFocus={()=> {this.setState({showKeyboard:true, currentFocus:'3'}) }} showSoftInputOnFocus={false} style={styles.otpInputBox} />
           </View>
-          <TouchableOpacity disabled={isLoading} style={styles.sendButton}>
+          <TouchableOpacity onPress={this.handleSubmit.bind(this)} disabled={isLoading} style={styles.sendButton}>
             {!isLoading ? (<Icon name='send-circle-outline' color='#2760B6' size={28} />): (<ActivityIndicator color={'black'} />)}
           </TouchableOpacity>
         </View>
@@ -173,7 +169,7 @@ axios.post('https://5945c274-9c28-48ed-83c5-366add66f155.mock.pstmn.io/post_Stor
     return (
       <View style={{marginTop:15}}>
         <Text style={{color:'#fff'}}>Didn't get the code yet?</Text>
-        <TouchableOpacity><Text style={{color:'#ffffff', fontWeight:'bold'}}>RESEND</Text></TouchableOpacity>
+        <TouchableOpacity ><Text style={{color:'#ffffff', fontWeight:'bold'}}>RESEND</Text></TouchableOpacity>
       </View>
     )
   }
