@@ -1,64 +1,30 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import Step1 from './src/Views/Step1/Step1'
+import Step2 from './src/Views/Step2/Step2';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SuccessScreen from './src/Views/Success/Success';
+const Stack = createNativeStackNavigator();
 
 export type Props = {
-  name: string;
-  baseEnthusiasmLevel?: number;
 };
 
-const Hello: React.FC<Props> = ({
-  name,
-  baseEnthusiasmLevel = 0,
-}) => {
-  const [enthusiasmLevel, setEnthusiasmLevel] = React.useState(
-    baseEnthusiasmLevel,
-  );
+const App: React.FC<Props> = ({ }) => {
 
-  const onIncrement = () =>
-    setEnthusiasmLevel(enthusiasmLevel + 1);
-  const onDecrement = () =>
-    setEnthusiasmLevel(
-      enthusiasmLevel > 0 ? enthusiasmLevel - 1 : 0,
-    );
-
-  const getExclamationMarks = (numChars: number) =>
-    numChars > 0 ? Array(numChars + 1).join('!') : '';
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.greeting}>
-        Hello {name}
-        {getExclamationMarks(enthusiasmLevel)}
-      </Text>
-      <View>
-        <Button
-          title="Increase enthusiasm"
-          accessibilityLabel="increment"
-          onPress={onIncrement}
-          color="blue"
-        />
-        <Button
-          title="Decrease enthusiasm"
-          accessibilityLabel="decrement"
-          onPress={onDecrement}
-          color="red"
-        />
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{
+    headerShown: false
+  }} initialRouteName="Home">
+        <Stack.Screen  name="Home" component={Step1} />
+        <Stack.Screen  name="preview"  component={Step2}/>
+        <Stack.Screen  name="success"  component={SuccessScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  greeting: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    margin: 16,
-  },
-});
 
-export default Hello;
+
+export default App;
