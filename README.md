@@ -99,30 +99,4 @@ Then delete the build folder, go back to the project's root folder and try again
 
 > **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please **open an issue and describe your problem**.
 
-## Contributing to the project
-
-Since the linting is done through [**eslint**](http://eslint.org/), you will need to configure your text editor to use the coding rules defined in the *.eslint.js* project file.
-
-> A code that contains unjustified errors won't be merged to the master branch.
-
-
-
-![install-section](http://www.codeblocq.com/img/atom-prefs-install-tab.png)
-
-- Then look for the linter package and install it
-
-![linter-package](http://www.codeblocq.com/img/atom-linter-package.png)
-
-- Then look for the linter-eslint package and install it
-
-![linter-eslint-package](http://www.codeblocq.com/img/atom-linter-eslint-package.png)
-
-- Open a javascript file (ending with *.js*) and paste
-
-```js
-console.log('raises two errors')
-```
-As you can guess, your editor should raise two errors because console.log is forbidden and there is a semi-column missing. Congrats !
-
-> **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please open an issue and describe your problem.
 
