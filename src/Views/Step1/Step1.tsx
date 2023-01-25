@@ -55,13 +55,13 @@ export default class Step1 extends React.Component<AppProps, any> {
                 data: {},
             })
           .then((response)=> {
-            console.log(response);
+
 
             this.props.navigation.navigate('preview')
           })
           .catch(function (error) {
 
-            console.log('error',error);
+
           });
           
           this.setState({isLoading:false})
@@ -193,7 +193,7 @@ export default class Step1 extends React.Component<AppProps, any> {
             aadharNo.length!==14||
             panNo.length!==10
 
-        return (<CtButton disabled={false} onPress={this.handleSubmit.bind(this)} />)
+        return (<CtButton disabled={disabled} onPress={this.handleSubmit.bind(this)} />)
 
     }
     renderLogo = () => (
